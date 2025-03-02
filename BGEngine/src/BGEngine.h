@@ -1,8 +1,6 @@
 #pragma once
 
-// Used by applications
+#include <iostream>
 
 #include "BGEngine/Application.h"
-
-// Engine Entry Point
 #include "BGEngine/EngineEntryPoint.h"
