@@ -1,0 +1,9 @@
+[submodule "BGEngine/vendor/spdlog"]
+	path = BGEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "BGEngine/vendor/GLFW"]
+	path = BGEngine/vendor/GLFW
+	url = https://github.com/glfw/glfw
+[submodule "BGEngine/Vendor/ImGui"]
+	path = BGEngine/Vendor/ImGui
+	url = https://github.com/ocornut/imgui

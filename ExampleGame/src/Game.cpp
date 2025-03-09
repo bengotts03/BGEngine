@@ -1,13 +1,13 @@
+#include "BGPCH.h"
 #include <BGEngine.h>
 
 class Game : public BGEngine::Application {
 public:
-	Game() {
+	Game() = default;
 
-	}
-
-	~Game() {
-
+	~Game() override
+	{
+		
 	}
 };
 

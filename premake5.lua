@@ -8,15 +8,24 @@ workspace "BGEngine"
 		"Distribution"
 	}
 
-outputDir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+IncludeDir = {}
+IncludeDir["GLFW"] = "BGEngine/vendor/GLFW3/include"
+
+include "BGEngine/vendor/GLFW3"
 
 project "BGEngine"
 	location "BGEngine"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
-	targetdir ("bin/" .. outputDir .. "/%{prj.name}")
-	objdir ("bin-intermediates/" .. outputDir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-intermediates/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "BGPCH.h"
+	pchsource "BGEngine/src/BGPCH.cpp"
 
 	files{
 		"%{prj.name}/src/**.h",
@@ -24,12 +33,19 @@ project "BGEngine"
 	}
 
 	includedirs{
-		--"BGEngine/vendor/spdlog/include"
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links{
+		"GLFW",
+		"opengl32.lib",
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "off"
 		systemversion "latest"
 
 		defines{
@@ -38,8 +54,10 @@ project "BGEngine"
 		}
 
 		postbuildcommands{
-			("{COPYFILE} %{cfg.buildtarget.relpath} ../bin/" .. outputDir .. "/Game")
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/ExampleGame")
 		}
+
+		buildoptions {"/utf-8"}
 
 	filter "configurations:Debug"
 		defines "BG_DEBUG"
@@ -60,8 +78,8 @@ project "ExampleGame"
 	kind "ConsoleApp"
 	language "C++"
 
-	targetdir ("bin/" .. outputDir .. "/%{prj.name}")
-	objdir ("bin-intermediates/" .. outputDir .. "/%{prj.name}")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-intermediates/" .. outputdir .. "/%{prj.name}")
 
 	files{
 		"%{prj.name}/src/**.h",
@@ -69,7 +87,9 @@ project "ExampleGame"
 	}
 
 	includedirs{
-		--"BGEngine/vendor/spdlog/include",
+		"BGEngine/vendor/spdlog/include",
+		"BGEngine/vendor/GLFW3/include",
+		"BGEngine/vendor/ImGui/",
 		"BGEngine/src"
 	}
 
@@ -79,12 +99,14 @@ project "ExampleGame"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "off"
 		systemversion "latest"
 
 		defines{
 			"BG_PLATFORM_WINDOWS"
 		}
+
+		buildoptions {"/utf-8"}
 
 	filter "configurations:Debug"
 		defines "BG_DEBUG"

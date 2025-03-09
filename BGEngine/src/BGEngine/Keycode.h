@@ -1,0 +1,53 @@
+#pragma once
+
+namespace BGEngine
+{
+	enum Keycode
+	{
+		ALPHA_0 = 48,
+		ALPHA_1 = 49,
+		ALPHA_2 = 50,
+		ALPHA_3 = 51,
+		ALPHA_4 = 52,
+		ALPHA_5 = 53,
+		ALPHA_6 = 54,
+		ALPHA_7 = 55,
+		ALPHA_8 = 56,
+		ALPHA_9 = 57,
+		A = 65,
+		B = 66,
+		C = 67,
+		D = 68,
+		E = 69,
+		F = 70,
+		G = 71,
+		H = 72,
+		I = 73,
+		J = 74,
+		K = 75,
+		L = 76,
+		M = 77,
+		N = 78,
+		O = 79,
+		P = 80,
+		Q = 81,
+		R = 82,
+		S = 83,
+		T = 84,
+		U = 85,
+		V = 86,
+		W = 87,
+		X = 88,
+		Y = 89,
+		Z = 90,
+		SPACE = 32,
+		ENTER = 257,
+		ESCAPE = 256,
+		LEFT_SHIFT = 340,
+		RIGHT_SHIFT = 344,
+		LEFT_CTRL = 341,
+		RIGHT_CTRL = 345,
+		LEFT_ALT = 342,
+		RIGHT_ALT = 346
+	};
+}

@@ -76,35 +76,42 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>BGPCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;BG_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Debug-windows-x86_64\BGEngine\BGEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Debug-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Debug-windows-x86_64\Game</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\BGEngine\BGEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Debug-windows-x86_64\ExampleGame &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Debug-windows-x86_64\ExampleGame &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>BGPCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;BG_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -112,23 +119,27 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Release-windows-x86_64\BGEngine\BGEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Release-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Release-windows-x86_64\Game</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\BGEngine\BGEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Release-windows-x86_64\ExampleGame &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Release-windows-x86_64\ExampleGame &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>BGPCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;BG_DISTRIBUTION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
@@ -136,20 +147,39 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>copy /B /Y ..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Distribution-windows-x86_64\Game</Command>
+      <Command>IF EXIST ..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Distribution-windows-x86_64\ExampleGame &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Distribution-windows-x86_64\ExampleGame &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\BGEngine\Input.h" />
     <ClInclude Include="src\BGEngine.h" />
     <ClInclude Include="src\BGEngine\Application.h" />
+    <ClInclude Include="src\BGEngine\Debug.h" />
     <ClInclude Include="src\BGEngine\EngineCore.h" />
     <ClInclude Include="src\BGEngine\EngineEntryPoint.h" />
+    <ClInclude Include="src\BGEngine\Keycode.h" />
+    <ClInclude Include="src\BGEngine\Window.h" />
+    <ClInclude Include="src\BGPCH.h" />
+    <ClInclude Include="src\Platform\Desktop\DesktopWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\Desktop\DesktopInput.cpp" />
     <ClCompile Include="src\BGEngine\Application.cpp" />
+    <ClCompile Include="src\BGEngine\Debug.cpp" />
+    <ClCompile Include="src\BGEngine\Window.cpp" />
+    <ClCompile Include="src\BGPCH.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Desktop\DesktopWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="vendor\GLFW3\GLFW.vcxproj">
+      <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
