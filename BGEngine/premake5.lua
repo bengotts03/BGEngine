@@ -2,6 +2,7 @@ project "BGEngine"
 	location "BGEngine"
 	kind "SharedLib"
 	language "C++"
+	cppdialect "C++17"
 	staticruntime "off"
 
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")

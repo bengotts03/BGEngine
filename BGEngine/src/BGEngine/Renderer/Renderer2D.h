@@ -1,6 +1,6 @@
 #pragma once
 
-namespace BGEngine
+namespace BGEngine::Renderer
 {
 	class Renderer2D
 	{
