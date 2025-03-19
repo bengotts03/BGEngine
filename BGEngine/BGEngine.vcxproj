@@ -155,25 +155,33 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\BGEngine\Input.h" />
+    <ClInclude Include="src\BGEngine\Renderer\Renderer.h" />
+    <ClInclude Include="src\BGEngine\Renderer\Renderer2D.h" />
     <ClInclude Include="src\BGEngine.h" />
+    <ClInclude Include="src\BGEngine\AppLayer.h" />
+    <ClInclude Include="src\BGEngine\AppLayerStack.h" />
     <ClInclude Include="src\BGEngine\Application.h" />
     <ClInclude Include="src\BGEngine\Debug.h" />
     <ClInclude Include="src\BGEngine\EngineCore.h" />
     <ClInclude Include="src\BGEngine\EngineEntryPoint.h" />
+    <ClInclude Include="src\BGEngine\Input.h" />
     <ClInclude Include="src\BGEngine\Keycode.h" />
     <ClInclude Include="src\BGEngine\Window.h" />
     <ClInclude Include="src\BGPCH.h" />
     <ClInclude Include="src\Platform\Desktop\DesktopWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\Desktop\DesktopInput.cpp" />
+    <ClCompile Include="src\BGEngine\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\BGEngine\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\BGEngine\AppLayer.cpp" />
+    <ClCompile Include="src\BGEngine\AppLayerStack.cpp" />
     <ClCompile Include="src\BGEngine\Application.cpp" />
     <ClCompile Include="src\BGEngine\Debug.cpp" />
     <ClCompile Include="src\BGEngine\Window.cpp" />
     <ClCompile Include="src\BGPCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Platform\Desktop\DesktopInput.cpp" />
     <ClCompile Include="src\Platform\Desktop\DesktopWindow.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BGEngine.h" />
+    <ClInclude Include="src\BGEngine\AppLayer.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BGEngine\AppLayerStack.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\BGEngine\Application.h">
       <Filter>BGEngine</Filter>
     </ClInclude>
@@ -25,6 +31,12 @@
     <ClInclude Include="src\BGEngine\EngineEntryPoint.h">
       <Filter>BGEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\BGEngine\Input.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BGEngine\Keycode.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\BGEngine\Window.h">
       <Filter>BGEngine</Filter>
     </ClInclude>
@@ -32,8 +44,16 @@
     <ClInclude Include="src\Platform\Desktop\DesktopWindow.h">
       <Filter>Platform\Desktop</Filter>
     </ClInclude>
+    <ClInclude Include="src\BGEngine\Renderer\Renderer.h" />
+    <ClInclude Include="src\BGEngine\Renderer\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BGEngine\AppLayer.cpp">
+      <Filter>BGEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BGEngine\AppLayerStack.cpp">
+      <Filter>BGEngine</Filter>
+    </ClCompile>
     <ClCompile Include="src\BGEngine\Application.cpp">
       <Filter>BGEngine</Filter>
     </ClCompile>
@@ -44,8 +64,13 @@
       <Filter>BGEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\BGPCH.cpp" />
+    <ClCompile Include="src\Platform\Desktop\DesktopInput.cpp">
+      <Filter>Platform\Desktop</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\Desktop\DesktopWindow.cpp">
       <Filter>Platform\Desktop</Filter>
     </ClCompile>
+    <ClCompile Include="src\BGEngine\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\BGEngine\Renderer\Renderer2D.cpp" />
   </ItemGroup>
 </Project>

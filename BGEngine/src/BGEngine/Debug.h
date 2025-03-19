@@ -22,9 +22,9 @@ namespace BGEngine {
 #define BG_ENGINE_LOG_INFO(...)	BGEngine::Debug::GetEngineLogger()->info(__VA_ARGS__)
 #define BG_ENGINE_LOG_WARN(...)	BGEngine::Debug::GetEngineLogger()->warn(__VA_ARGS__)
 #define BG_ENGINE_LOG_ERROR(...)	BGEngine::Debug::GetEngineLogger()->error(__VA_ARGS__)
-#define BG_ENGINE_LOG_FATAL(...)	BGEngine::Debug::GetEngineLogger()->fatal(__VA_ARGS__)
+#define BG_ENGINE_LOG_FATAL(...)	BGEngine::Debug::GetEngineLogger()->critical(__VA_ARGS__)
 
 #define BG_LOG_INFO(...)			BGEngine::Debug::GetClientLogger()->info(__VA_ARGS__)
 #define BG_LOG_WARN(...)			BGEngine::Debug::GetClientLogger()->warn(__VA_ARGS__)
 #define BG_LOG_ERROR(...)			BGEngine::Debug::GetClientLogger()->error(__VA_ARGS__)
-#define BG_LOG_FATAL(...)			BGEngine::Debug::GetClientLogger()->fatal(__VA_ARGS__)
+#define BG_LOG_FATAL(...)			BGEngine::Debug::GetClientLogger()->critical(__VA_ARGS__)

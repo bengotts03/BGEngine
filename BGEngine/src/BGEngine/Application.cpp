@@ -3,8 +3,6 @@
 
 #include <cassert>
 
-#include "Input.h"
-
 namespace BGEngine {
 
 	Application* Application::instance = nullptr;
@@ -15,21 +13,29 @@ namespace BGEngine {
 
 		window = Window::Create(WindowProperties("BGEngine", 1280, 720));
 
-		BG_ENGINE_LOG_INFO(window->GetTitle());
+		for (AppLayer* layer : layerStack)
+			layer->OnStart();
 	}
 
 	Application::~Application() {
 		// Shutdown any systems
 		window->Shutdown();
+
+		for (AppLayer* layer : layerStack)
+			layer->OnShutdown();
 	}
 
 	void Application::Close() {
 		isRunning = false;
 	}
 
-	void Application::Run() {
+	void Application::Run() const
+	{
 		while (isRunning)
 		{
+			for (AppLayer* layer : layerStack)
+				layer->OnUpdate();
+
 			window->OnUpdate();
 		}
 	}

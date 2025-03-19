@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AppLayerStack.h"
 #include "EngineCore.h"
 #include "Window.h"
 
@@ -15,10 +16,15 @@ namespace BGEngine {
 		Window& GetWindow() { return *window; }
 		static Application& Get() { return *instance; }
 
-		void Run();
+		void PushLayer(AppLayer* layer) { layerStack.PushLayer(layer); }
+		void PushOverlay(AppLayer* layer) { layerStack.PushOverlay(layer); }
+
+		void Run() const;
 	private:
 	    unique_ptr<Window> window;
 		static Application* instance;
+
+		AppLayerStack layerStack;
 
 		bool isRunning = true;
 	};

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="BGEngine">
+      <UniqueIdentifier>{A4C80767-9095-6272-B9AE-501AA5DA9700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BGEngine\Renderer">
+      <UniqueIdentifier>{CA04998D-361B-9723-7F92-2245EBE767AB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Desktop">
+      <UniqueIdentifier>{F33B4F5B-DF34-6EAD-0867-5332F4BE4DB9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\BGEngine.h" />
+    <ClInclude Include="..\src\BGEngine\AppLayer.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\AppLayerStack.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\Application.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\Debug.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\EngineCore.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\EngineEntryPoint.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\Input.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\Keycode.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\Renderer\Renderer.h">
+      <Filter>BGEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\Renderer\Renderer2D.h">
+      <Filter>BGEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGEngine\Window.h">
+      <Filter>BGEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BGPCH.h" />
+    <ClInclude Include="..\src\Platform\Desktop\DesktopWindow.h">
+      <Filter>Platform\Desktop</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\BGEngine\AppLayer.cpp">
+      <Filter>BGEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGEngine\AppLayerStack.cpp">
+      <Filter>BGEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGEngine\Application.cpp">
+      <Filter>BGEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGEngine\Debug.cpp">
+      <Filter>BGEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGEngine\Renderer\Renderer.cpp">
+      <Filter>BGEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGEngine\Renderer\Renderer2D.cpp">
+      <Filter>BGEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGEngine\Window.cpp">
+      <Filter>BGEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BGPCH.cpp" />
+    <ClCompile Include="..\src\Platform\Desktop\DesktopInput.cpp">
+      <Filter>Platform\Desktop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Platform\Desktop\DesktopWindow.cpp">
+      <Filter>Platform\Desktop</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

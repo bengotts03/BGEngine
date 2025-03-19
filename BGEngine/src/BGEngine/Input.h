@@ -4,12 +4,12 @@
 namespace BGEngine
 {
 	// TODO: Replace with an actual vector implementation
-	struct Vector2
+	struct BG_API Vector2
 	{
 		float x, y;
 	};
 
-	class Input
+	class BG_API Input
 	{
 	public:
 		// Tapped

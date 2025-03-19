@@ -2,7 +2,7 @@
 
 namespace BGEngine
 {
-	enum Keycode
+	enum BG_API Keycode
 	{
 		ALPHA_0 = 48,
 		ALPHA_1 = 49,
