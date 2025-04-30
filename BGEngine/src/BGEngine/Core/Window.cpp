@@ -1,5 +1,5 @@
 #include "BGPCH.h"
-#include "BGEngine/Window.h"
+#include "BGEngine/Core/Window.h"
 
 //#ifdef BG_PLATFORM_WINDOWS
 #include "Platform/Desktop/DesktopWindow.h"

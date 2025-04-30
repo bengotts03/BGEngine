@@ -13,10 +13,9 @@ workspace "BGEngine"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencies"
-	--include "vendor/bin/premake"
 	include "BGEngine/vendor/GLFW3"
 	include "BGEngine/vendor/ImGui"
-	--include "BGEngine/vendor/Glad"
+	include "BGEngine/vendor/GLAD"
 group ""
 
 group "Core"

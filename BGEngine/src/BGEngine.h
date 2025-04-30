@@ -4,9 +4,9 @@
 #include "BGPCH.h"
 
 // For use by Apps
-#include "BGEngine/Application.h"
-#include "BGEngine/AppLayer.h"
-#include "BGEngine/Debug.h"
+#include "BGEngine/Core/Application.h"
+#include "BGEngine/Core/AppLayer.h"
+#include "BGEngine/Debug/Debug.h"
 
-#include "BGEngine/Input.h"
-#include "BGEngine/Keycode.h"
+#include "BGEngine/Core/Input.h"
+#include "BGEngine/Core/Keycode.h"

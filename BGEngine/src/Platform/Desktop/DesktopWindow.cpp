@@ -1,6 +1,8 @@
 #include "BGPCH.h"
 #include "DesktopWindow.h"
 
+#include "glad/glad.h"
+
 namespace BGEngine{
 
 	DesktopWindow::DesktopWindow(const WindowProperties& windowProps): Window(windowProps)
@@ -33,6 +35,9 @@ namespace BGEngine{
 			return;
 		}
 		glfwMakeContextCurrent(window);
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		assert(status, "Failed to initialize GLAD");
 	}
 
 	void DesktopWindow::OnUpdate()

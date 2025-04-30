@@ -79,8 +79,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>BGPCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;BG_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;GLFW_INCLUDE_NONE;BG_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -95,7 +95,7 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\BGEngine\BGEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\BGEngine\BGEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Debug-windows-x86_64\ExampleGame &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Debug-windows-x86_64\ExampleGame &gt; nul)</Command>
+      <Command>copy /B /Y "..\bin\Debug-windows-x86_64\BGEngine\BGEngine.dll" "$(SolutionDir)\bin\Debug-windows-x86_64\ExampleGame\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -103,8 +103,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>BGPCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;BG_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;GLFW_INCLUDE_NONE;BG_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -123,7 +123,7 @@
       <ImportLibrary>..\bin\Release-windows-x86_64\BGEngine\BGEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\BGEngine\BGEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Release-windows-x86_64\ExampleGame &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Release-windows-x86_64\ExampleGame &gt; nul)</Command>
+      <Command>copy /B /Y "..\bin\Release-windows-x86_64\BGEngine\BGEngine.dll" "$(SolutionDir)\bin\Release-windows-x86_64\ExampleGame\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Distribution|x64'">
@@ -131,8 +131,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>BGPCH.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;BG_DISTRIBUTION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>BG_PLATFORM_WINDOWS;BG_BUILD_DLL;GLFW_INCLUDE_NONE;BG_DISTRIBUTION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW3\include;vendor\GLAD\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -151,42 +151,58 @@
       <ImportLibrary>..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.dll\ (xcopy /Q /E /Y /I ..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Distribution-windows-x86_64\ExampleGame &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.dll ..\bin\Distribution-windows-x86_64\ExampleGame &gt; nul)</Command>
+      <Command>copy /B /Y "..\bin\Distribution-windows-x86_64\BGEngine\BGEngine.dll" "$(SolutionDir)\bin\Distribution-windows-x86_64\ExampleGame\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\BGEngine.h" />
+    <ClInclude Include="src\BGEngine\Core\AppLayer.h" />
+    <ClInclude Include="src\BGEngine\Core\AppLayerStack.h" />
+    <ClInclude Include="src\BGEngine\Core\Application.h" />
+    <ClInclude Include="src\BGEngine\Core\EngineCore.h" />
+    <ClInclude Include="src\BGEngine\Core\EngineEntryPoint.h" />
+    <ClInclude Include="src\BGEngine\Core\Input.h" />
+    <ClInclude Include="src\BGEngine\Core\Keycode.h" />
+    <ClInclude Include="src\BGEngine\Core\Window.h" />
+    <ClInclude Include="src\BGEngine\Debug\Debug.h" />
     <ClInclude Include="src\BGEngine\Renderer\Renderer.h" />
     <ClInclude Include="src\BGEngine\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\BGEngine.h" />
-    <ClInclude Include="src\BGEngine\AppLayer.h" />
-    <ClInclude Include="src\BGEngine\AppLayerStack.h" />
-    <ClInclude Include="src\BGEngine\Application.h" />
-    <ClInclude Include="src\BGEngine\Debug.h" />
-    <ClInclude Include="src\BGEngine\EngineCore.h" />
-    <ClInclude Include="src\BGEngine\EngineEntryPoint.h" />
-    <ClInclude Include="src\BGEngine\Input.h" />
-    <ClInclude Include="src\BGEngine\Keycode.h" />
-    <ClInclude Include="src\BGEngine\Window.h" />
+    <ClInclude Include="src\BGEngine\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\BGEngine\Renderer\Shader.h" />
+    <ClInclude Include="src\BGEngine\Renderer\VertexArray.h" />
+    <ClInclude Include="src\BGEngine\Renderer\VertexBuffer.h" />
     <ClInclude Include="src\BGPCH.h" />
     <ClInclude Include="src\Platform\Desktop\DesktopWindow.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BGEngine\Core\AppLayer.cpp" />
+    <ClCompile Include="src\BGEngine\Core\AppLayerStack.cpp" />
+    <ClCompile Include="src\BGEngine\Core\Application.cpp" />
+    <ClCompile Include="src\BGEngine\Core\Window.cpp" />
+    <ClCompile Include="src\BGEngine\Debug\Debug.cpp" />
     <ClCompile Include="src\BGEngine\Renderer\Renderer.cpp" />
     <ClCompile Include="src\BGEngine\Renderer\Renderer2D.cpp" />
-    <ClCompile Include="src\BGEngine\AppLayer.cpp" />
-    <ClCompile Include="src\BGEngine\AppLayerStack.cpp" />
-    <ClCompile Include="src\BGEngine\Application.cpp" />
-    <ClCompile Include="src\BGEngine\Debug.cpp" />
-    <ClCompile Include="src\BGEngine\Window.cpp" />
+    <ClCompile Include="src\BGEngine\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\BGEngine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\BGEngine\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\BGEngine\Renderer\VertexBuffer.cpp" />
     <ClCompile Include="src\BGPCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Platform\Desktop\DesktopInput.cpp" />
     <ClCompile Include="src\Platform\Desktop\DesktopWindow.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW3\GLFW.vcxproj">
       <Project>{154B857C-0182-860D-AA6E-6C109684020F}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\ImGui\ImGui.vcxproj">
+      <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\GLAD\Glad.vcxproj">
+      <Project>{BDD6857C-A90D-870D-52FA-6C103E10030F}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

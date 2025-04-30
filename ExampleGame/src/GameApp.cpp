@@ -1,5 +1,5 @@
 #include <BGEngine.h>
-#include <BGEngine/EngineEntryPoint.h>
+#include <BGEngine/Core/EngineEntryPoint.h>
 
 #include "GameLayer.h"
 

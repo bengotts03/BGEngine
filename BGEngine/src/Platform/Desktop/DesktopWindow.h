@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../BGEngine/Window.h"
+#include "BGEngine/Core/Window.h"
 #include <GLFW/glfw3.h>
 
 namespace BGEngine

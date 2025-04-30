@@ -1,5 +1,4 @@
 project "BGEngine"
-	location "BGEngine"
 	kind "SharedLib"
 	language "C++"
 	cppdialect "C++17"
@@ -19,13 +18,15 @@ project "BGEngine"
 	includedirs{
 		"src",
 		"vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links{
 		"GLFW",
 		"opengl32.lib",
-        "ImGui"
+        "ImGui",
+		"Glad"
 	}
 
 	filter "system:windows"
@@ -33,7 +34,8 @@ project "BGEngine"
 
 		defines{
 			"BG_PLATFORM_WINDOWS",
-			"BG_BUILD_DLL"
+			"BG_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands{

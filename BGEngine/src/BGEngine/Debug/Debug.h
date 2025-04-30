@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EngineCore.h"
+#include "BGEngine/Core/EngineCore.h"
 
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"

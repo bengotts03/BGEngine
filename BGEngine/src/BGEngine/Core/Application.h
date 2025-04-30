@@ -16,8 +16,8 @@ namespace BGEngine {
 		Window& GetWindow() { return *window; }
 		static Application& Get() { return *instance; }
 
-		void PushLayer(AppLayer* layer) { layerStack.PushLayer(layer); }
-		void PushOverlay(AppLayer* layer) { layerStack.PushOverlay(layer); }
+		void PushLayer(AppLayer* layer);
+		void PushOverlay(AppLayer* layer);
 
 		void Run() const;
 	private:
@@ -25,6 +25,8 @@ namespace BGEngine {
 		static Application* instance;
 
 		AppLayerStack layerStack;
+
+		unsigned int vertexBuffer, vertexArray, indexBuffer;
 
 		bool isRunning = true;
 	};

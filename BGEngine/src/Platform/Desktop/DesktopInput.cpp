@@ -1,7 +1,7 @@
 #include "BGPCH.h"
 
-#include "BGEngine/Application.h"
-#include "BGEngine/Input.h"
+#include "BGEngine/Core/Application.h"
+#include "BGEngine/Core/Input.h"
 #include "GLFW/glfw3.h"
 
 namespace BGEngine
