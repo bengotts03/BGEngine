@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef BG_PLATFORM_WINDOWS
+#if defined(BG_PLATFORM_WINDOWS) || defined(BG_PLATFORM_MACOS)
 
 extern BGEngine::Application* BGEngine::CreateApp();
 

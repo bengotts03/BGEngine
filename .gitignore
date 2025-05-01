@@ -1,7 +1,21 @@
-# Ignore Dirs
+# CMake build directories
+build/
+cmake-build-*/
+
+# IDE specific files
+.idea/
 .vs/
+.vscode/
+
+# Binary output directories
 bin/
+lib/
 bin-intermediates/
 
-# Files
+# User specific files
 *.user
+CMakeUserPresets.json
+
+# OS specific files
+.DS_Store
+Thumbs.db

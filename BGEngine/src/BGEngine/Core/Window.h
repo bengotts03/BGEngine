@@ -23,9 +23,9 @@ namespace BGEngine {
 		Window(const WindowProperties& windowProps) : windowProps(windowProps) {}
 		virtual ~Window() = default;
 
-		virtual int GetWindowWidth() const = 0;
-		virtual int GetWindowHeight() const = 0;
-		virtual string GetTitle() const = 0;
+		virtual int GetWindowWidth() const { return windowProps.width; }
+		virtual int GetWindowHeight() const { return windowProps.height; }
+		virtual string GetTitle() const { return windowProps.title; }
 
 		virtual void Init(const WindowProperties& windowProps) = 0;
 		virtual void OnUpdate() = 0;

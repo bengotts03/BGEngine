@@ -1,28 +1,35 @@
 #include "BGPCH.h"
+#include "glad/glad.h"
+
 #include "Application.h"
 
-#include <glad/glad.h>
-#include <cassert>
 
 namespace BGEngine {
 
 	Application* Application::instance = nullptr;
 
 	Application::Application() {
-		assert(!instance, "Application already exists!");
+		//assert(!instance, "Application already exists!");
 		instance = this;
+
+        BG_LOG_INFO("Creating Application");
 
 		window = Window::Create(WindowProperties("BGEngine", 1280, 720));
 
-		for (AppLayer* layer : layerStack)
-			layer->OnStart(); 
+        BG_LOG_INFO("Created Window");
 
-		float vertices[] = {
+		for (AppLayer* layer : layerStack)
+			layer->OnStart();
+
+        BG_LOG_INFO("Created Layers");
+
+        float vertices[] = {
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
 			 0.0f,  0.5f, 0.0f
 		};
 
+        /*
 		// Create a vertex array
 		glGenVertexArrays(1, &vertexArray);
 		glBindVertexArray(vertexArray);
@@ -47,6 +54,7 @@ namespace BGEngine {
 			0, 1, 2
 		};
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+         */
 	}
 
 	Application::~Application() {
@@ -75,12 +83,15 @@ namespace BGEngine {
 	{
 		while (isRunning)
 		{
+
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+            /*
 			glBindVertexArray(vertexArray);
 			// Draws indexed vertices (indices)
 			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+            */
 
 			for (AppLayer* layer : layerStack)
 				layer->OnUpdate();

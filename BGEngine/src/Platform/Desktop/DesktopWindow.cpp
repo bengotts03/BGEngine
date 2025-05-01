@@ -2,10 +2,11 @@
 #include "DesktopWindow.h"
 
 #include "glad/glad.h"
+#include <cassert>
 
 namespace BGEngine{
 
-	DesktopWindow::DesktopWindow(const WindowProperties& windowProps): Window(windowProps)
+	DesktopWindow::DesktopWindow(const WindowProperties& windowProps) : Window(windowProps)
 	{
 		Init(windowProps);
 	}
@@ -17,17 +18,13 @@ namespace BGEngine{
 
 	void DesktopWindow::Init(const WindowProperties& windowProps)
 	{
-		this->title = windowProps.title;
-		this->width = windowProps.width;
-		this->height = windowProps.height;
-
 		if (!glfwInit())
 		{
 			BG_ENGINE_LOG_ERROR("Could not initialize GLFW!");
 			return;
 		}
 
-		window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+		window = glfwCreateWindow(windowProps.width, windowProps.height, windowProps.title.c_str(), nullptr, nullptr);
 
 		if (!window)
 		{
@@ -36,8 +33,14 @@ namespace BGEngine{
 		}
 		glfwMakeContextCurrent(window);
 
+        BG_ENGINE_LOG_INFO("Created window");
+
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		assert(status, "Failed to initialize GLAD");
+        if(!status)
+        {
+            BG_ENGINE_LOG_ERROR("Failed to initialize GLAD");
+            return;
+        }
 	}
 
 	void DesktopWindow::OnUpdate()
@@ -52,24 +55,8 @@ namespace BGEngine{
 		glfwTerminate();
 	}
 
-	int DesktopWindow::GetWindowWidth() const
-	{
-		return width;
-	}
-
-	int DesktopWindow::GetWindowHeight() const
-	{
-		return height;
-	}
-
-	string DesktopWindow::GetTitle() const
-	{
-		return title;
-	}
-
 	unique_ptr<Window> DesktopWindow::Create(const WindowProperties windowProps)
 	{
 		return make_unique<DesktopWindow>(windowProps);
 	}
-	
 }
