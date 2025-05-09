@@ -1,6 +1,6 @@
 # BGEngine
 
-A modern C++ game engine with OpenGL rendering.
+A modern C++ game engine loosely based off of the Hazel engine youtuber series.
 
 ## Prerequisites
 
