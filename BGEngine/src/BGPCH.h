@@ -13,3 +13,6 @@
 #ifdef BG_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif
+
+#ifdef BG_PLATFORM_MACOS
+#endif

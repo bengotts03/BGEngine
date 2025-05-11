@@ -57,11 +57,11 @@ namespace BGEngine
 
 	float Input::GetMouseX()
 	{
-		return GetMousePosition().x;
+		return GetMousePosition().getX();
 	}
 
 	float Input::GetMouseY()
 	{
-		return GetMousePosition().y;
+		return GetMousePosition().getY();
 	}
 }

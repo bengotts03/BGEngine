@@ -3,30 +3,35 @@
 #include "AppLayerStack.h"
 #include "EngineCore.h"
 #include "Window.h"
+#include "BGEngine/UI/ImGUIAppLayer.h"
+#include "BGEngine/Components/ObjectRegistry.h"
 
 namespace BGEngine {
 	class BG_API Application
 	{
 	public:
+		static Application& Get() { return *instance; }
+
 		Application();
 		virtual ~Application();
 
 		void Close();
 
 		Window& GetWindow() { return *window; }
-		static Application& Get() { return *instance; }
+		Components::ObjectRegistry& GetRegistry() { return *objectRegistery; }
 
 		void PushLayer(AppLayer* layer);
 		void PushOverlay(AppLayer* layer);
 
 		void Run() const;
 	private:
-	    unique_ptr<Window> window;
 		static Application* instance;
+	    unique_ptr<Window> window;
 
 		AppLayerStack layerStack;
+        UI::ImGUIAppLayer* guiLayer;
 
-		unsigned int vertexBuffer, vertexArray, indexBuffer;
+        Components::ObjectRegistry* objectRegistery; // TODO: Move this into a scene class so each scene has its own object registery
 
 		bool isRunning = true;
 	};

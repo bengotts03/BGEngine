@@ -1,68 +1,42 @@
 #include "BGPCH.h"
-#include "glad/glad.h"
-
 #include "Application.h"
+#include "BGEngine/Renderer/Renderer.h"
+#include "BGEngine/Renderer/Renderer2D.h"
+#include "BGEngine/Renderer/ShaderManager.h"
+#include "BGEngine/Maths/Vector3.h"
+#include "BGEngine/UI/ImGUIAppLayer.h"
 
+using namespace BGEngine::Graphics;
+using namespace BGEngine::Components;
 
 namespace BGEngine {
 
 	Application* Application::instance = nullptr;
 
 	Application::Application() {
-		//assert(!instance, "Application already exists!");
 		instance = this;
-
-        BG_LOG_INFO("Creating Application");
+        objectRegistery = new Components::ObjectRegistry();
 
 		window = Window::Create(WindowProperties("BGEngine", 1280, 720));
 
-        BG_LOG_INFO("Created Window");
+        Renderer::Init();
+        ShaderManager::Init();
 
-		for (AppLayer* layer : layerStack)
-			layer->OnStart();
+        // Load shaders
+        // TODO: Move this to a better place, these shaders here are the default for testing
+        ShaderManager::LoadShader("BasicShader", "../../ExampleGame/assets/shaders/basic.vert", "../../ExampleGame/assets/shaders/basic.frag");
 
-        BG_LOG_INFO("Created Layers");
-
-        float vertices[] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
-		};
-
-        /*
-		// Create a vertex array
-		glGenVertexArrays(1, &vertexArray);
-		glBindVertexArray(vertexArray);
-
-		// Create a vertex buffer
-		glGenBuffers(1, &vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-
-		// Upload the vertex data to the GPU
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		// Enable the vertex attribute
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-
-		// Create an index buffer
-		// Order of vertices to draw
-		glGenBuffers(1, &indexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-
-		unsigned int indices[] = {
-			0, 1, 2
-		};
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-         */
-	}
+        guiLayer = new UI::ImGUIAppLayer();
+        PushOverlay(guiLayer);
+    }
 
 	Application::~Application() {
 		// Shutdown any systems
 		window->Shutdown();
+        Renderer::Shutdown();
 
 		for (AppLayer* layer : layerStack)
-			layer->OnShutdown();
+            layer->OnShutdown();
 	}
 
 	void Application::PushLayer(AppLayer* layer) {
@@ -77,24 +51,27 @@ namespace BGEngine {
 
 	void Application::Close() {
 		isRunning = false;
+
+        window->Shutdown();
+        Renderer::Shutdown();
 	}
 
 	void Application::Run() const
 	{
 		while (isRunning)
 		{
-
-			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-
-            /*
-			glBindVertexArray(vertexArray);
-			// Draws indexed vertices (indices)
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
-            */
+			Renderer::BeginDraw();
+            Renderer2D::DrawQuad(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), Vector3(1.0f, 0.0f, 0.0f));
+            Renderer2D::DrawQuad(Vector2(1.0f, 1.0f), Vector2(1.0f, 1.0f), Vector3(0.0f, 1.0f, 0.0f));
+            Renderer::EndDraw();
 
 			for (AppLayer* layer : layerStack)
-				layer->OnUpdate();
+                layer->OnUpdate();
+
+            guiLayer->Begin();
+            for (AppLayer* layer : layerStack)
+                layer->OnGUI();
+            guiLayer->End();
 
 			window->OnUpdate();
 		}

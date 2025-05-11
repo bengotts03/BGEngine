@@ -1,14 +1,11 @@
 #pragma once
 #include "Keycode.h"
+#include "BGEngine/Maths/Vector2.h"
+
+using namespace BGEngine::Maths;
 
 namespace BGEngine
 {
-	// TODO: Replace with an actual vector implementation
-	struct BG_API Vector2
-	{
-		float x, y;
-	};
-
 	class BG_API Input
 	{
 	public:

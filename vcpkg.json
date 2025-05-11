@@ -2,8 +2,11 @@
   "name": "bgengine",
   "version-string": "0.1.0",
   "dependencies": [
+    {
+      "name": "imgui",
+      "features": ["glfw-binding", "opengl3-binding"]
+    },
     "glfw3",
-    "imgui",
     "glm",
     "spdlog",
     "opengl"

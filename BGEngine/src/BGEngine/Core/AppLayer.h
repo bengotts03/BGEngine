@@ -11,6 +11,7 @@ namespace BGEngine
 		virtual void OnStart() = 0;
 		virtual void OnShutdown() = 0;
 		virtual void OnUpdate() = 0;
+        virtual void OnGUI() = 0;
 
 		const std::string& GetName() const { return layerName; }
 	private:

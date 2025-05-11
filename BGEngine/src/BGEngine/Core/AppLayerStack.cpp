@@ -3,6 +3,7 @@
 
 namespace BGEngine {
 	AppLayerStack::AppLayerStack() {
+        layers.reserve(10); // Reserve space for 10 layers to avoid multiple allocations
 		layerInsert = layers.begin();
 	}
 

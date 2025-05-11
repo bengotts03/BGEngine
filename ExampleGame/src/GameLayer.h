@@ -11,4 +11,5 @@ public:
 	void OnStart() override;
 	void OnShutdown() override;
 	void OnUpdate() override;
+	void OnGUI() override;
 };
