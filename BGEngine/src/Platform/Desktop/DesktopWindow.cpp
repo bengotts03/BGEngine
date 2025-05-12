@@ -3,6 +3,7 @@
 
 #include "glad/glad.h"
 #include <cassert>
+#include "BGEngine/Renderer/Renderer.h"
 
 namespace BGEngine{
 
@@ -46,6 +47,13 @@ namespace BGEngine{
             BG_ENGINE_LOG_ERROR("Failed to initialize GLAD");
             return;
         }
+
+        glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height) {
+            Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
+
+            //TODO: Fix this with events, but for now just access Renderer
+            Graphics::Renderer::OnWindowResize(0, 0, width, height);
+        });
     }
 
 	void DesktopWindow::Shutdown()

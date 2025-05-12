@@ -7,6 +7,20 @@
 #include "BGEngine/Components/ObjectRegistry.h"
 
 namespace BGEngine {
+
+    struct Time{
+        static float DeltaTime;
+        static float TimeScale;
+
+        static float GetDeltaTime() { return DeltaTime; }
+        static float GetTimeScale() { return TimeScale; }
+
+        Time() {
+            DeltaTime = 0.0f;
+            TimeScale = 1.0f;
+        }
+    };
+
 	class BG_API Application
 	{
 	public:
@@ -30,7 +44,6 @@ namespace BGEngine {
 
 		AppLayerStack layerStack;
         UI::ImGUIAppLayer* guiLayer;
-
         Components::ObjectRegistry* objectRegistery; // TODO: Move this into a scene class so each scene has its own object registery
 
 		bool isRunning = true;

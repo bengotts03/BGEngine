@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Renderer.h"
-
+#include "BGEngine/Core/Colour.h"
 #include "BGEngine/Maths/Vector2.h"
 #include "BGEngine/Maths/Vector3.h"
 
@@ -30,11 +30,11 @@ namespace BGEngine::Graphics
         static void BeginDraw();
         static void EndDraw();
 
-        static void DrawQuad(const Vector2 position, const Vector2 size, const Vector3 color);
-        static void DrawQuad(const Vector2 position, const Vector2 size, const Vector2 rotation, const Vector3 color);
-        static void DrawCircle(const Vector2 position, const float radius, const Vector2 color);
-        static void DrawLine(const Vector2 start, const Vector2 end, const float thickness, const Vector2 color);
-        static void DrawRect(const Vector2 position, const Vector2 size, const Vector2 color);
+        static void DrawQuad(const Vector2 position, const Vector2 size, const Colour colour);
+        static void DrawQuad(const Vector2 position, const Vector2 size, const Vector2 rotation, const Colour colour);
+        static void DrawCircle(const Vector2 position, const float radius, const Colour colour);
+        static void DrawLine(const Vector2 start, const Vector2 end, const float thickness, const Colour colour);
+        static void DrawRect(const Vector2 position, const Vector2 size, const Colour colour);
 
         static RendererStatistics GetRendererStats() {
             return rendererData->stats;

@@ -4,6 +4,7 @@
 #include "RenderCommand.h"
 #include "Renderer2D.h"
 #include "Shader.h"
+#include "BGEngine/Core/Application.h"
 
 namespace BGEngine::Graphics{
 
@@ -13,7 +14,6 @@ namespace BGEngine::Graphics{
         BG_ENGINE_LOG_INFO("Graphics Initialized");
 
         RenderCommand::Init();
-        RenderCommand::SetViewport(0, 0, 1280, 720);
 
         // TODO: Needs a better method once we have a Renderer3D as well
         Renderer2D::Init();
@@ -23,6 +23,11 @@ namespace BGEngine::Graphics{
     {
         // Cleanup resources
         BG_ENGINE_LOG_INFO("Graphics Shutdown");
+    }
+
+    void Renderer::OnWindowResize(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+    {
+        RenderCommand::SetViewport(x, y, width, height);
     }
 
     void Renderer::BeginDraw()
@@ -37,7 +42,6 @@ namespace BGEngine::Graphics{
     void Renderer::Submit(std::shared_ptr<Shader> shader, std::shared_ptr<VertexArray> vertexArray, glm::mat4 transform)
     {
         // TODO: Add shader logic
-
         shader->SetFloat4("model", glm::mat4(1.0f));
         shader->SetFloat4("view", transform);
         shader->SetFloat4("projection", glm::mat4(1.0f));

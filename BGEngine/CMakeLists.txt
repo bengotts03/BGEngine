@@ -1,7 +1,7 @@
 # Add the glad source file
 file(GLOB_RECURSE BG_ENGINE_SOURCES
         "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/src/glad.c"  # Update to the new location of glad.c
+        "${CMAKE_CURRENT_SOURCE_DIR}/vendor/glad/src/glad.c"  # OnUpdate to the new location of glad.c
 )
 
 file(GLOB_RECURSE BG_ENGINE_HEADERS

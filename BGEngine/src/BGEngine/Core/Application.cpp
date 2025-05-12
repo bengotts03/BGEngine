@@ -61,8 +61,7 @@ namespace BGEngine {
 		while (isRunning)
 		{
 			Renderer::BeginDraw();
-            Renderer2D::DrawQuad(Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f), Vector3(1.0f, 0.0f, 0.0f));
-            Renderer2D::DrawQuad(Vector2(1.0f, 1.0f), Vector2(1.0f, 1.0f), Vector3(0.0f, 1.0f, 0.0f));
+
             Renderer::EndDraw();
 
 			for (AppLayer* layer : layerStack)

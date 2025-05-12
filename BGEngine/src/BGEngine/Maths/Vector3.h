@@ -6,6 +6,7 @@
 #define BGENGINE_VECTOR3_H
 
 #include "BGPCH.h"
+#include "Vector2.h"
 
 namespace BGEngine::Maths {
     /**
@@ -22,6 +23,9 @@ namespace BGEngine::Maths {
     public:
         Vector3() : x(0), y(0), z(0) {}
         Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
+        std::string ToString() const {
+            return "Vector3(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
+        }
 
         float getX() const { return x; }
         float getY() const { return y; }
@@ -33,21 +37,18 @@ namespace BGEngine::Maths {
         Vector3 operator+(const Vector3& other) const {
             return Vector3(x + other.x, y + other.y, z + other.z);
         }
-
         Vector3 operator-(const Vector3& other) const {
             return Vector3(x - other.x, y - other.y, z - other.z);
         }
-
         Vector3 operator*(float scalar) const {
             return Vector3(x * scalar, y * scalar, z * scalar);
         }
-
         Vector3 operator/(float scalar) const {
             return Vector3(x / scalar, y / scalar, z / scalar);
         }
 
-        std::string ToString() const {
-            return "Vector3(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
+        Vector2 ToVector2() const {
+            return Vector2(x, y);
         }
 
         void normalize();

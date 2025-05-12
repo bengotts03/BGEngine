@@ -2,6 +2,7 @@
 #include "Renderer2D.h"
 #include "ShaderManager.h"
 #include "Vertex.h"
+#include "BGEngine/Core/Colour.h"
 #include "BGEngine/Maths/Vector3.h"
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -38,12 +39,12 @@ namespace BGEngine::Graphics {
 
     }
 
-    void Renderer2D::DrawQuad(const Vector2 position, const Vector2 size, const Vector3 color) {
+    void Renderer2D::DrawQuad(const Vector2 position, const Vector2 size, const Colour colour) {
         float vertices[] = {
-        0.5f, 0.5f, 0.0f, color.getX(), color.getY(), color.getZ(), // TOP RIGHT
-        -0.5f, 0.5f, 0.0f, color.getX(), color.getY(), color.getZ(), // TOP LEFT
-        -0.5f, -0.5f, 0.0f, color.getX(), color.getY(), color.getZ(), // BOTTOM LEFT
-        0.5f, -0.5f, 0.0f, color.getX(), color.getY(), color.getZ(), // BOTTOM RIGHT
+        0.5f, 0.5f, 0.0f, colour.r, colour.g, colour.b, // TOP RIGHT
+        -0.5f, 0.5f, 0.0f, colour.r, colour.g, colour.b, // TOP LEFT
+        -0.5f, -0.5f, 0.0f, colour.r, colour.g, colour.b, // BOTTOM LEFT
+        0.5f, -0.5f, 0.0f, colour.r, colour.g, colour.b  // BOTTOM RIGHT
         };
         /* TODO: Switch to a vertex data type
         Vertex verticesV[] = {
@@ -79,6 +80,7 @@ namespace BGEngine::Graphics {
 
         auto transform = glm::mat4(1.0f);
         transform = glm::translate(transform, glm::vec3(position.getX(), position.getY(), 0.0f));
+        transform = glm::scale(transform, glm::vec3(size.getX(), size.getY(), 1.0f));
         Renderer::Submit(ShaderManager::GetShader("BasicShader"), vertexArray, transform);
     }
 }
