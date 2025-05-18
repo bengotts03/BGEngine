@@ -15,6 +15,9 @@ namespace BGEngine
 		void OnUpdate() override;
 		void Shutdown() override;
 
+        double GetTime() override;
+        double GetFPS() override;
+
 		void* GetNativeWindow() const override { return window; }
 
 		static unique_ptr<Window> Create(const WindowProperties windowProps = WindowProperties());

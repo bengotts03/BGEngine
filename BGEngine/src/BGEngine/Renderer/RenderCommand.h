@@ -18,7 +18,7 @@ namespace BGEngine::Graphics {
         static void Clear();
 
         static void DrawLine();
-        static void DrawIndexed(std::shared_ptr<VertexArray>& vertexArray);
+        static void DrawIndexed(std::shared_ptr<VertexArray>& vertexArray, uint32_t indexCount);
     private:
         static RendererAPI* rendererAPI;
     };

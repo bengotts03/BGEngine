@@ -14,6 +14,6 @@ namespace BGEngine::Graphics
 		void Clear() override;
 
 		void DrawLine() override;
-        void DrawIndexed(std::shared_ptr<VertexArray>& vertexArray) override;
+        void DrawIndexed(std::shared_ptr<VertexArray>& vertexArray, uint32_t indexCount) override;
     };
 }

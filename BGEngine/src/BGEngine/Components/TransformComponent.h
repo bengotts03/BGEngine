@@ -6,11 +6,11 @@
 #define BGENGINE_TRANSFORMCOMPONENT_H
 
 #include "BGPCH.h"
-#include "BGEngine/Components/Component.h"
 #include "BGEngine/Maths/Vector3.h"
+#include "BGEngine/Components/Component.h"
 
 namespace BGEngine::Components {
-    class TransformComponent : public BGEngine::Components::Component {
+    class TransformComponent : public Component {
     public:
         TransformComponent();
         TransformComponent(const BGEngine::Maths::Vector3& position, const BGEngine::Maths::Vector3& rotation,

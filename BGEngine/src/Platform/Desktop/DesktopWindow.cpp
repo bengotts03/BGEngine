@@ -49,8 +49,6 @@ namespace BGEngine{
         }
 
         glfwSetWindowSizeCallback(window, [](GLFWwindow* window, int width, int height) {
-            Window* win = static_cast<Window*>(glfwGetWindowUserPointer(window));
-
             //TODO: Fix this with events, but for now just access Renderer
             Graphics::Renderer::OnWindowResize(0, 0, width, height);
         });
@@ -62,11 +60,53 @@ namespace BGEngine{
 		glfwTerminate();
 	}
 
-	void DesktopWindow::OnUpdate()
+    // TODO: Fix this mess of a fps calculation
+    // Variables for smoother FPS calculation
+    double previousTime = glfwGetTime();
+    double currentTime = 0.0;
+    double deltaTime = 0.0;
+    double averageDeltaTime = 0.0;
+    const int numSamples = 100;  // Number of frames to average
+    std::vector<double> frameTimes(numSamples, 0.0);
+    int currentFrame = 0;
+    double fps = 0.0;
+
+    void DesktopWindow::OnUpdate()
 	{
-		glfwPollEvents();
+        // Calculate time between frames
+        currentTime = glfwGetTime();
+        deltaTime = currentTime - previousTime;
+        previousTime = currentTime;
+
+        // Store frame time in circular buffer
+        frameTimes[currentFrame] = deltaTime;
+        currentFrame = (currentFrame + 1) % numSamples;
+
+        // Calculate average frame time from all samples
+        averageDeltaTime = 0.0;
+        for (double frameTime : frameTimes) {
+            averageDeltaTime += frameTime;
+        }
+        averageDeltaTime /= numSamples;
+
+        // Calculate and display FPS
+        if (averageDeltaTime > 0.0) {
+            fps = 1.0 / averageDeltaTime;
+        }
+
+        glfwPollEvents();
 		glfwSwapBuffers(window);
 	}
+
+    double DesktopWindow::GetTime()
+    {
+        return glfwGetTime();
+    }
+
+    double DesktopWindow::GetFPS()
+    {
+        return fps;
+    }
 
 	unique_ptr<Window> DesktopWindow::Create(const WindowProperties windowProps)
 	{

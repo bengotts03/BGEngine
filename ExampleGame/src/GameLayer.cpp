@@ -7,35 +7,32 @@ using namespace BGEngine::Components;
 using namespace BGEngine::Graphics;
 using namespace BGEngine::Maths;
 
-GameObject* gameObject = nullptr;
-
 void GameLayer::OnStart() {
-	BG_ENGINE_LOG_INFO("GameLayer Attached");
+	BG_ENGINE_LOG_INFO("GameLayer Start");
 
-    gameObject = new GameObject();
-    gameObject->SetName("Player");
+    // Without batching: 28 fps
+    // With batching: 119 fps FUCK YEAH
+    Renderer2D::BeginDraw(*Application::Get().GetMainCamera());
+
+    int width = 50, height = 100;
+    for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++) {
+            GameObject *obj = new GameObject();
+            obj->SetName("Obj" + std::to_string(x + y));
+            obj->GetTransform()->SetPosition(Vector3(x * 2.0f, y * 2.0f, 0));
+            obj->GetTransform()->SetScale(Vector3(0.5f, 0.5f, 0.5f));
+            obj->AddComponent<SpriteRendererComponent>()->SetColour(Colour::White());
+        }
+    }
+
+    Renderer2D::EndDraw();
 }
 
 void GameLayer::OnShutdown() {
-	BG_ENGINE_LOG_INFO("GameLayer Detached");
+    BG_ENGINE_LOG_INFO("GameLayer Shutdown");
 }
 
 void GameLayer::OnUpdate() {
-    auto currentPos = gameObject->GetTransform()->GetPosition();
-
-    if(BGEngine::Input::IsKeyDown(BGEngine::Keycode::W))
-        gameObject->GetTransform()->SetPosition(currentPos + Vector3(0.0f, 0.1f, 0.0f));
-
-    if(BGEngine::Input::IsKeyDown(BGEngine::Keycode::S))
-        gameObject->GetTransform()->SetPosition(currentPos + Vector3(0.0f, -0.1f, 0.0f));
-
-    if(BGEngine::Input::IsKeyDown(BGEngine::Keycode::A))
-        gameObject->GetTransform()->SetPosition(currentPos + Vector3(-0.1f, 0.0f, 0.0f));
-
-    if(BGEngine::Input::IsKeyDown(BGEngine::Keycode::D))
-        gameObject->GetTransform()->SetPosition(currentPos + Vector3(0.1f, 0.0f, 0.0f));
-
-    Renderer2D::DrawQuad(gameObject->GetTransform()->GetPosition().ToVector2(), gameObject->GetTransform()->GetScale().ToVector2(), Vector3(1.0f, 0.0f, 0.0f));
 }
 
 void GameLayer::OnGUI() {
@@ -45,6 +42,13 @@ void GameLayer::OnGUI() {
     ImGui::Text("Renderer2D Stats:");
     ImGui::Text("Draw Calls: %d", stats.DrawCalls);
     ImGui::Text("Quads: %d", stats.QuadCount);
+
+    ImGui::Separator();
+
+    ImGui::Text("Performance Inspector:");
+
+    ImGui::Text("FPS: %f", Application::Get().GetWindow().GetFPS());
+    ImGui::Text("Delta Time: %f", Time::DeltaTime);
 
     ImGui::Separator();
 
@@ -58,6 +62,13 @@ void GameLayer::OnGUI() {
                 ImGui::Text("Rotation: %s", object->GetTransform()->GetRotation().ToString().c_str());
                 ImGui::Text("Scale: %s", object->GetTransform()->GetScale().ToString().c_str());
                 ImGui::TreePop();
+            }
+            if (object->GetComponent<CameraComponent>() != nullptr) {
+                auto camera = object->GetComponent<CameraComponent>();
+                if(ImGui::TreeNode("Camera")){
+                    ImGui::Text("Orthographic Size: %d", camera->GetOrthographicSize());
+                    ImGui::TreePop();
+                }
             }
             ImGui::TreePop();
         }

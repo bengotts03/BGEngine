@@ -7,6 +7,9 @@
 
 #include "BGPCH.h"
 #include "BGEngine/Components/Component.h"
+#include "BGEngine/Renderer/Sprite.h"
+
+using namespace BGEngine::Graphics;
 
 namespace BGEngine::Components {
     struct ShapesLibrary{
@@ -19,12 +22,21 @@ namespace BGEngine::Components {
      */
     class SpriteRendererComponent : public Components::Component {
     public:
-        SpriteRendererComponent() = default;
+        SpriteRendererComponent();
+        SpriteRendererComponent(Sprite sprite);
         ~SpriteRendererComponent() override = default;
 
         void OnStart() override {};
-        void OnUpdate() override {};
+        void OnUpdate() override;
         void OnDestroy() override {};
+
+        void SetSprite(const Sprite& sprite) { _sprite = sprite; }
+        const Sprite& GetSprite() const { return _sprite; }
+
+        void SetColour(const Colour& colour) { _sprite.SetColour(colour); }
+    private:
+        Sprite _sprite;
+        void DrawSprite();
     };
 
 }

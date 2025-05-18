@@ -13,8 +13,11 @@ namespace BGEngine::Graphics {
     private:
         unsigned int vertexBufferID;
         BufferLayout bufferLayout;
+
+        int bufferSize = 0;
     public:
-        OpenGLVertexBuffer(float* vertices, unsigned int size);
+        OpenGLVertexBuffer(unsigned int size);
+        OpenGLVertexBuffer(std::vector<Vertex> vertices, unsigned int size);
         ~OpenGLVertexBuffer() override;
 
         virtual void Bind() const override;
@@ -22,6 +25,8 @@ namespace BGEngine::Graphics {
 
         virtual const BufferLayout& GetBufferLayout() const override { return bufferLayout; }
         virtual void SetBufferLayout(const BufferLayout& layout) override { bufferLayout = layout; }
+
+        virtual void SetData(const void* data, uint32_t size) override;
     };
 }
 

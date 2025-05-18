@@ -1,15 +1,21 @@
 #include "BGPCH.h"
 #include "Application.h"
+
+#include <memory>
 #include "BGEngine/Renderer/Renderer.h"
 #include "BGEngine/Renderer/Renderer2D.h"
 #include "BGEngine/Renderer/ShaderManager.h"
 #include "BGEngine/Maths/Vector3.h"
 #include "BGEngine/UI/ImGUIAppLayer.h"
 
+#include "BGEngine/Components/CameraComponent.h"
+
 using namespace BGEngine::Graphics;
 using namespace BGEngine::Components;
 
 namespace BGEngine {
+    double Time::DeltaTime = 0.0f;
+    double Time::TimeScale = 1.0f;
 
 	Application* Application::instance = nullptr;
 
@@ -17,14 +23,14 @@ namespace BGEngine {
 		instance = this;
         objectRegistery = new Components::ObjectRegistry();
 
+        auto cameraObj = new GameObject();
+        cameraObj->SetName("Main Camera");
+        mainCamera = cameraObj->AddComponent<CameraComponent>();
+
 		window = Window::Create(WindowProperties("BGEngine", 1280, 720));
 
         Renderer::Init();
         ShaderManager::Init();
-
-        // Load shaders
-        // TODO: Move this to a better place, these shaders here are the default for testing
-        ShaderManager::LoadShader("BasicShader", "../../ExampleGame/assets/shaders/basic.vert", "../../ExampleGame/assets/shaders/basic.frag");
 
         guiLayer = new UI::ImGUIAppLayer();
         PushOverlay(guiLayer);
@@ -56,13 +62,21 @@ namespace BGEngine {
         Renderer::Shutdown();
 	}
 
-	void Application::Run() const
-	{
+    double lastFrameTime = 0.0;
+
+	void Application::Run() {
+        lastFrameTime = window->GetTime();
 		while (isRunning)
 		{
-			Renderer::BeginDraw();
+            double currentTime = window->GetTime();
+            Time::DeltaTime = (currentTime - lastFrameTime) * Time::TimeScale;
+            lastFrameTime = currentTime;
 
+			Renderer::BeginDraw();
             Renderer::EndDraw();
+
+            for (auto object : objectRegistery->GetAllGameObjects())
+                object->OnUpdate();
 
 			for (AppLayer* layer : layerStack)
                 layer->OnUpdate();

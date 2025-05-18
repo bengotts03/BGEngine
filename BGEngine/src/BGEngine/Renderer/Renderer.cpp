@@ -1,10 +1,10 @@
 #include "BGPCH.h"
 #include "Renderer.h"
-
 #include "RenderCommand.h"
 #include "Renderer2D.h"
 #include "Shader.h"
 #include "BGEngine/Core/Application.h"
+#include "BGEngine/Components/CameraComponent.h"
 
 namespace BGEngine::Graphics{
 
@@ -34,21 +34,17 @@ namespace BGEngine::Graphics{
     {
         RenderCommand::Clear();
         RenderCommand::SetClearColor(0, 0, 0, 1);
-
-        // TODO: Move this to a better place
-        Renderer2D::BeginDraw();
     }
 
     void Renderer::Submit(std::shared_ptr<Shader> shader, std::shared_ptr<VertexArray> vertexArray, glm::mat4 transform)
     {
-        // TODO: Add shader logic
-        shader->SetFloat4("model", glm::mat4(1.0f));
-        shader->SetFloat4("view", transform);
-        shader->SetFloat4("projection", glm::mat4(1.0f));
+        shader->SetFloat4("transform", transform);
+        auto camera = Application::Get().GetMainCamera();
+        shader->SetFloat4("viewProjection", camera->GetViewProjectionMatrix());
         shader->Bind();
 
         vertexArray->Bind();
-        RenderCommand::DrawIndexed(vertexArray);
+        RenderCommand::DrawIndexed(vertexArray, sizeof(vertexArray) * sizeof(Vertex));
     }
 
     void Renderer::EndDraw()

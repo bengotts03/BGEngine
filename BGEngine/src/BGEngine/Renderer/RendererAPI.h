@@ -26,7 +26,7 @@ namespace BGEngine::Graphics
 		virtual void Clear() = 0;
 
 		virtual void DrawLine() = 0;
-		virtual void DrawIndexed(std::shared_ptr<VertexArray>& vertices) = 0;
+		virtual void DrawIndexed(std::shared_ptr<VertexArray>& vertices, uint32_t indexCount) = 0;
 
 		inline static GraphicsAPI GetAPI() { return graphicsAPI; }
 		static RendererAPI* Create();

@@ -29,10 +29,10 @@ namespace BGEngine::Graphics
         glDrawArrays(GL_LINES, 0, 2);
     }
 
-    void OpenGLRendererAPI::DrawIndexed(std::shared_ptr<VertexArray>& vertexArray)
+    void OpenGLRendererAPI::DrawIndexed(std::shared_ptr<VertexArray>& vertexArray, uint32_t indexCount)
     {
         vertexArray->Bind();
-        int count = vertexArray->GetIndexBuffer()->GetCount();
+        int count = indexCount ? indexCount : vertexArray->GetIndexBuffer()->GetCount();
         glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, 0);
     }
 }

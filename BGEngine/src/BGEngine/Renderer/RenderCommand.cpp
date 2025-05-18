@@ -26,8 +26,8 @@ namespace BGEngine::Graphics{
         rendererAPI->Clear();
     }
 
-    void RenderCommand::DrawIndexed(std::shared_ptr<VertexArray>& vertexArray) {
-        rendererAPI->DrawIndexed(vertexArray);
+    void RenderCommand::DrawIndexed(std::shared_ptr<VertexArray>& vertexArray, uint32_t indexCount) {
+        rendererAPI->DrawIndexed(vertexArray, indexCount);
     }
 
     void RenderCommand::DrawLine() {

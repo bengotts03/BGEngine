@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Renderer.h"
+#include "ShaderManager.h"
+#include "BGEngine/Components/CameraComponent.h"
 #include "BGEngine/Core/Colour.h"
 #include "BGEngine/Maths/Vector2.h"
 #include "BGEngine/Maths/Vector3.h"
@@ -18,6 +20,13 @@ namespace BGEngine::Graphics
         std::shared_ptr<VertexArray> quadVertexArray;
         std::shared_ptr<VertexBuffer> quadVertexBuffer;
         std::shared_ptr<IndexBuffer> quadIndexBuffer;
+        std::shared_ptr<Shader> quadShader;
+
+        int QuadIndexCount;
+        Vertex* QuadBuffer;
+        Vertex* QuadBufferPointer;
+
+        glm::mat4 ViewProjection;
 
         RendererStatistics stats;
     };
@@ -27,8 +36,9 @@ namespace BGEngine::Graphics
         static void Init();
         static void Shutdown();
 
-        static void BeginDraw();
+        static void BeginDraw(Components::CameraComponent& camera);
         static void EndDraw();
+        static void Flush();
 
         static void DrawQuad(const Vector2 position, const Vector2 size, const Colour colour);
         static void DrawQuad(const Vector2 position, const Vector2 size, const Vector2 rotation, const Colour colour);
@@ -40,8 +50,8 @@ namespace BGEngine::Graphics
             return rendererData->stats;
         }
     private:
-        void StartBatch();
-        void EndBatch();
+        static void StartBatch();
+        static void EndBatch();
 
         static RendererData* rendererData;
     };

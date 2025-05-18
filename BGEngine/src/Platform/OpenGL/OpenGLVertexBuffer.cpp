@@ -4,16 +4,23 @@
 
 #include "BGPCH.h"
 #include "OpenGLVertexBuffer.h"
-
+#include "BGEngine/Renderer/Vertex.h"
 #include "glad/glad.h"
 
 namespace BGEngine::Graphics {
 
-    OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, unsigned int size){
+    OpenGLVertexBuffer::OpenGLVertexBuffer(unsigned int size) : bufferSize(size) {
         glGenBuffers(1, &vertexBufferID);
         glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
 
-        glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+    }
+
+    OpenGLVertexBuffer::OpenGLVertexBuffer(std::vector<Vertex> vertices, unsigned int size) : bufferSize(size) {
+        glGenBuffers(1, &vertexBufferID);
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+
+        glBufferData(GL_ARRAY_BUFFER, size, &vertices[0], GL_STATIC_DRAW);
     }
 
     OpenGLVertexBuffer::~OpenGLVertexBuffer() {
@@ -27,4 +34,10 @@ namespace BGEngine::Graphics {
     void OpenGLVertexBuffer::Unbind() const {
         glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
+
+    void OpenGLVertexBuffer::SetData(const void* data, uint32_t size) {
+        glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+    }
+
 }

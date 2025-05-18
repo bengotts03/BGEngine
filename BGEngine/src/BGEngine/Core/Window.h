@@ -25,7 +25,11 @@ namespace BGEngine {
 
 		virtual int GetWindowWidth() const { return windowProps.width; }
 		virtual int GetWindowHeight() const { return windowProps.height; }
+        double GetAspectRatio() const { return static_cast<double>(windowProps.width) / static_cast<double>(windowProps.height); }
 		virtual string GetTitle() const { return windowProps.title; }
+
+        virtual double GetTime() = 0;
+        virtual double GetFPS() = 0;
 
 		virtual void Init(const WindowProperties& windowProps) = 0;
 		virtual void OnUpdate() = 0;

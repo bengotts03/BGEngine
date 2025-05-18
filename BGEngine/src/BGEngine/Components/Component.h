@@ -8,6 +8,9 @@
 #include "BGPCH.h"
 
 namespace BGEngine::Components {
+    // Forward declarations
+    class GameObject;
+    
     /**
      * @brief Base class for all components in the game engine.
      * Components are used to add functionality to game objects.
@@ -31,8 +34,11 @@ namespace BGEngine::Components {
          * @brief Called every frame.
          */
         virtual void OnUpdate() {}
-    private:
+
+        void SetGameObject(GameObject* gameObject) { _gameObject = gameObject; }
+    protected:
         std::string _name;
+        GameObject* _gameObject;
     };
 }
 

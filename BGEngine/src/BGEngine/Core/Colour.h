@@ -7,8 +7,7 @@
 
 #include "BGPCH.h"
 
-namespace BGEngine::Maths {
-
+namespace BGEngine {
     class Colour {
     public:
         Colour() : r(0), g(0), b(0), a(1) {}

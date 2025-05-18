@@ -13,8 +13,10 @@ namespace BGEngine::Graphics {
         Maths::Vector3 position;
         Maths::Vector3 color;
 
-        Vertex(Maths::Vector3 position, Maths::Vector3 color) : position(position), color(color){
-
+        Vertex() = default;
+        Vertex(Maths::Vector3 position, Maths::Vector3 color) {
+            this->position = position;
+            this->color = color;
         }
     };
 }

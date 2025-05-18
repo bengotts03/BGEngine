@@ -13,6 +13,8 @@ namespace BGEngine::Components {
 
     void ObjectRegistry::Register(std::shared_ptr<GameObject> gameObject) {
         _gameObjects.push_back(gameObject);
+
+        gameObject->OnStart();
     }
 
     void ObjectRegistry::Unregister(std::shared_ptr<GameObject> gameObject) {
@@ -20,6 +22,8 @@ namespace BGEngine::Components {
         if (it != _gameObjects.end()) {
             _gameObjects.erase(it, _gameObjects.end());
         }
+
+        gameObject->OnDestroy();
     }
 
     std::shared_ptr<GameObject> ObjectRegistry::GetGameObject(const std::string &name) {

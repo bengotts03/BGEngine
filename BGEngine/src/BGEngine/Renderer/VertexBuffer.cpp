@@ -6,9 +6,19 @@
 #include "Renderer.h"
 
 namespace BGEngine::Graphics {
-    VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size) {
+    VertexBuffer* VertexBuffer::Create(uint32_t size) {
         if(Renderer::GetAPI() == RendererAPI::GraphicsAPI::None) {
-            //BG_CORE_ASSERT(false, "RendererAPI::None is not supported!");
+            return nullptr;
+        }
+        if(Renderer::GetAPI() == RendererAPI::GraphicsAPI::OpenGL) {
+            return new OpenGLVertexBuffer(size);
+        }
+
+        return nullptr;
+    }
+
+    VertexBuffer* VertexBuffer::Create(std::vector<Vertex> vertices, uint32_t size) {
+        if(Renderer::GetAPI() == RendererAPI::GraphicsAPI::None) {
             return nullptr;
         }
         if(Renderer::GetAPI() == RendererAPI::GraphicsAPI::OpenGL) {
